@@ -1,7 +1,8 @@
-import { formulario } from "../Utilities/selectors.js";
-import { scripting, addChildNodes } from '../Utilities/functions.js';
+import { nombreI, emailI, telefonoI, empresaI,formulario } from "../Utilities/selectors.js";
+import { scripting, addChildNodes, eliminarCliente } from '../Utilities/functions.js';
+import { Cliente } from "./Cliente.js";
 
-export class UI {
+class UI {
     imprimirAlerta(mensaje, tipo) {
         //Creamos la alerta
         const div = document.createElement('DIV');
@@ -48,6 +49,10 @@ export class UI {
                 const aEditar = scripting('A',['text-teal-600','hover:text-teal-900','mr-5'],'Editar');
                 const aEliminar = scripting('A',['text-red-600','hover:text-red-900'],'Eliminar');
 
+                const cliente = new Cliente(id,nombre,email,telefono,empresa);
+                aEliminar.onclick = function(e) {
+                    eliminarCliente(e,cliente);
+                }
                 
                 aEditar.href = `editar-cliente.html?id=${id}`
                 aEliminar.href = '#';
@@ -65,4 +70,11 @@ export class UI {
             }
         }
     }
+    llenarFormulario(cliente) {
+        nombreI.value = cliente.nombre;
+        telefonoI.value = cliente.telefono;
+        emailI.value = cliente.email;
+        empresaI.value = cliente.empresa;
+    }
 }
+export { UI };
