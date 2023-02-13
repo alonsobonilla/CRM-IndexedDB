@@ -6,11 +6,5 @@ document.addEventListener('DOMContentLoaded', () => {
     //Inicializando la BD
     iniciarlizarDB();
     //Eventos
-    eventListeners();
-})
-
-function eventListeners() {
     formulario.addEventListener('submit',validarCliente);
-}
-
-
+})
